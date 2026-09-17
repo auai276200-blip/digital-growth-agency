@@ -23,6 +23,109 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Apply production mobile fixes
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('script.js')
+          s = p.read_text()
+          replacements = {
+            'https://cdn.prod.website-files.com/665d764211c8c75a684bcf9d/6948ea7093233eb11598a435_6948dcc212e0ddc125e6b31e-1766384671474.jpeg':'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&fm=jpg&q=80&w=1200',
+            'https://cdn.prod.website-files.com/65b129d335c4e7fef9218829/65dde71b0e4da9e61fc8c7bf_Return%20on%20ad%20spend%20formulas%20for%20DTCs.png':'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&fm=jpg&q=80&w=1200',
+            'https://cdn.prod.website-files.com/68406adf095720647c8103d0/695e6bc61536f8d73f32c7d7_article-2bd0af3b-6562-41c9-997a-high-quality-realistic-photograph-of-a-creative--0-omz16i.jpeg':'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&fm=jpg&q=80&w=1200',
+          }
+          for old, new in replacements.items():
+              s = s.replace(old, new)
+          p.write_text(s)
+
+          c = Path('style.css')
+          css = c.read_text()
+          css += r'''
+
+/* Final mobile production polish */
+@media (max-width: 900px) {
+  html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
+  .nav { height: 74px; padding: 0 18px; }
+  .brand { font-size: 13px; }
+  .hero { min-height: 100svh; padding-top: 74px; }
+  .hero-copy { width: calc(100% - 36px); margin-top: 35px; }
+  .hero h1 { font-size: clamp(48px, 13vw, 78px); line-height: .93; letter-spacing: -.07em; max-width: 100%; }
+  .hero-sub { max-width: 100%; }
+  .hero-actions { align-items: flex-start; }
+  .button { min-height: 52px; }
+  .section { width: calc(100% - 36px); padding: 88px 0; }
+  .section-head { gap: 22px; margin-bottom: 38px; }
+  .section h2 { font-size: clamp(42px, 11vw, 68px); }
+  .service-grid { width: 100%; }
+  .service-card { min-height: 390px; padding: 24px; }
+  .service-card h3 { margin-top: 145px; font-size: clamp(28px, 8vw, 38px); }
+  .service-card p { max-width: 100%; padding-right: 8px; }
+  .visual-grid { gap: 10px; grid-template-rows: 300px 240px 240px; }
+  .visual-card { min-height: 0; }
+  .visual-card div { left: 18px; right: 18px; bottom: 18px; }
+  .capability-wall { gap: 8px; }
+  .cap-pill { min-height: 118px; padding: 18px; font-size: 16px; }
+  .statement { min-height: 620px; }
+  .statement-orbit { width: min(82vw, 360px); height: min(82vw, 360px); }
+  .cta { min-height: 680px; overflow:hidden; }
+  .cta-inner { width: 100%; }
+  .cta h2 { font-size: clamp(52px, 14vw, 76px); }
+  .cta-sphere { width: 300px; height: 300px; right: -170px; top: 150px; opacity: .42; }
+  .footer { padding: 38px 18px 22px; }
+  .footer-bottom { gap: 15px; flex-wrap: wrap; }
+  .mobile-menu-panel { top: 74px; inset: 74px 0 auto 0; }
+}
+
+@media (max-width: 520px) {
+  .nav { height: 68px; }
+  .brand .muted { display: none; }
+  .hero { min-height: 760px; }
+  .hero-copy { margin-top: 20px; }
+  .hero h1 { font-size: clamp(45px, 13.5vw, 64px); }
+  .hero-sub { font-size: 13px; line-height: 1.65; }
+  .hero-actions { margin-top: 28px; gap: 14px; }
+  .button { padding: 12px 14px 12px 16px; gap: 16px; font-size: 11px; }
+  .button-primary span { width: 24px; height: 24px; }
+  .text-link { width: 100%; }
+  .hero-meta { left: 18px; right: 18px; bottom: 20px; }
+  .section { width: calc(100% - 32px); padding: 72px 0; }
+  .service-card { min-height: 365px; }
+  .service-image { left: 16px; right: 16px; top: 50px; height: 104px; }
+  .service-card h3 { margin-top: 116px; }
+  .service-card a { bottom: 22px; }
+  .visual-grid { grid-template-rows: 280px 220px 220px; }
+  .visual-card b { font-size: 11px; }
+  .process-item { grid-template-columns: 42px 1fr 24px; padding: 24px 0; }
+  .process-item h3 { font-size: 18px; }
+  .process-item p { font-size: 11px; line-height: 1.6; }
+  .capability-wall { grid-template-columns: 1fr; }
+  .cap-pill.large { grid-column: auto; }
+  .cap-pill { min-height: 108px; }
+  .whatsapp-float {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 9999 !important;
+    position: fixed !important;
+    right: 12px !important;
+    bottom: calc(14px + env(safe-area-inset-bottom)) !important;
+    min-width: 142px;
+    min-height: 50px;
+    padding: 11px 12px 11px 15px !important;
+    gap: 10px !important;
+    font-size: 12px !important;
+  }
+  .whatsapp-float .wa-icon { display: inline-block !important; font-size: 22px !important; }
+  .whatsapp-float span { display: inline !important; }
+  .whatsapp-float b { width: 27px; height: 27px; }
+  .mobile-menu-panel { top: 68px; inset: 68px 0 auto 0; }
+}
+'''
+          c.write_text(css)
+          PY
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
