@@ -23,6 +23,99 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Apply mobile responsive fixes
+        shell: bash
+        run: |
+          cat >> style.css <<'CSS'
+
+/* ===== Mobile production polish ===== */
+@media (max-width: 900px) {
+  html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
+  .nav { height: 70px; padding: 0 18px; }
+  .brand { font-size: 13px; gap: 8px; }
+  .brand-orb { width: 16px; height: 16px; }
+  .menu { display: flex !important; width: 42px; height: 42px; align-items: center; justify-content: center; padding: 0; border: 1px solid rgba(255,255,255,.12); border-radius: 50%; }
+  .menu span { width: 18px; height: 1px; display: block; }
+  .hero { min-height: 100svh; padding-top: 70px; }
+  .hero-copy { width: calc(100% - 36px); margin: 20px auto 0; }
+  .hero h1 { font-size: clamp(45px, 13.5vw, 72px); line-height: .94; letter-spacing: -.07em; max-width: 100%; margin-bottom: 24px; }
+  .hero-sub { max-width: 100%; font-size: 14px; line-height: 1.65; }
+  .eyebrow { font-size: 8px; letter-spacing: 1.35px; margin-bottom: 20px; }
+  .hero-actions { margin-top: 28px; gap: 14px; align-items: stretch; }
+  .hero-actions .button { min-height: 50px; padding: 12px 14px 12px 16px; }
+  .text-link { display: inline-flex; align-items: center; min-height: 44px; }
+  .hero-meta { left: 18px; right: 18px; bottom: 18px; font-size: 8px; }
+  .section { width: calc(100% - 36px); padding: 82px 0; }
+  .section-head { gap: 20px; margin-bottom: 34px; }
+  .section h2 { font-size: clamp(42px, 11.5vw, 64px); }
+  .section-head > p { font-size: 13px; line-height: 1.7; }
+  .service-grid { grid-template-columns: 1fr !important; gap: 1px; }
+  .service-card, .service-card.wide { grid-column: auto !important; min-height: 390px; padding: 24px; }
+  .service-card h3 { font-size: 30px; margin-top: 150px; margin-bottom: 14px; }
+  .service-card p { font-size: 12px; max-width: 95%; }
+  .service-image { left: 18px !important; right: 18px !important; top: 50px !important; height: 112px !important; }
+  .service-card a { bottom: 23px; }
+  .visual-grid { grid-template-columns: 1fr !important; grid-template-rows: 300px 220px 220px !important; gap: 9px; }
+  .visual-card.visual-large { grid-row: auto !important; }
+  .visual-card div { left: 17px; right: 17px; bottom: 17px; }
+  .visual-card b { font-size: 12px; }
+  .statement { min-height: 680px; padding-left: 0; padding-right: 0; }
+  .statement-orbit { width: min(88vw, 420px); height: min(88vw, 420px); }
+  .statement-orbit:before { inset: 52px; }
+  .statement-orbit:after { inset: 112px; }
+  .statement h2 { font-size: clamp(46px, 12vw, 72px); }
+  .statement p { font-size: 13px; max-width: 90%; margin-top: 26px; }
+  .process-item { grid-template-columns: 42px 1fr 25px; gap: 8px; padding: 23px 0; }
+  .process-item h3 { font-size: 18px; }
+  .process-item p { font-size: 11px; line-height: 1.6; }
+  .capability-wall { grid-template-columns: 1fr 1fr !important; grid-auto-rows: 105px; gap: 7px; }
+  .cap-pill { padding: 15px; font-size: 14px; min-width: 0; }
+  .cap-pill.large { grid-column: span 2 !important; }
+  .cap-pill.tall { grid-row: span 1 !important; }
+  .cta { min-height: 650px; overflow: hidden; }
+  .cta h2 { font-size: clamp(52px, 14vw, 82px); line-height: .95; }
+  .cta p { font-size: 13px; max-width: 75%; }
+  .cta-sphere { width: 310px; height: 310px; right: -150px; opacity: .4; }
+  .footer { padding: 38px 18px 22px; }
+  .footer-top { gap: 28px; }
+  .footer-links { flex-wrap: wrap; gap: 15px; }
+  .footer-bottom { flex-direction: column; gap: 10px; line-height: 1.5; }
+}
+
+@media (max-width: 520px) {
+  .hero-copy { margin-top: 8px; }
+  .hero h1 { font-size: clamp(42px, 12.8vw, 62px); }
+  .hero-actions { flex-direction: column; align-items: flex-start; }
+  .hero-actions .button { width: auto; }
+  .marquee { padding: 18px 0; }
+  .marquee-track { gap: 22px; }
+  .marquee span { font-size: 11px; }
+  .section { padding: 72px 0; }
+  .service-card, .service-card.wide { min-height: 375px; }
+  .service-card h3 { font-size: 28px; margin-top: 145px; }
+  .visual-grid { grid-template-rows: 250px 190px 190px !important; }
+  .capability-wall { grid-template-columns: 1fr 1fr !important; }
+  .whatsapp-float {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    position: fixed !important;
+    z-index: 2147483647 !important;
+    right: 12px !important;
+    left: auto !important;
+    bottom: calc(12px + env(safe-area-inset-bottom)) !important;
+    min-height: 50px;
+    padding: 9px 11px 9px 13px;
+    gap: 8px;
+    font-size: 11px;
+  }
+  .whatsapp-float .wa-icon { font-size: 19px; }
+  .whatsapp-float b { width: 30px; height: 30px; }
+}
+CSS
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
