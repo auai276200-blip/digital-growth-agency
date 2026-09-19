@@ -48,3 +48,14 @@
  .showcase-grid img,.showcase-grid figure:first-child img{min-height:300px}
  .why-visual{height:220px;border-radius:18px}
 }
+
+/* Premium motion polish */
+.hero-visual,.why-visual,.cta-visual{transform-style:preserve-3d}
+.hero-orbit-label{position:absolute;right:24px;top:22px;z-index:6;display:flex;align-items:center;gap:8px;padding:9px 12px;border:1px solid #ffffff55;border-radius:999px;background:#ffffff30;backdrop-filter:blur(12px);font-size:9px;letter-spacing:1.6px;font-weight:800;color:#fff;box-shadow:0 10px 30px #10182816}
+.hero-orbit-label span{width:7px;height:7px;border-radius:50%;background:#53e3a6;box-shadow:0 0 0 5px #53e3a622;animation:livePulse 1.7s infinite}
+@keyframes livePulse{50%{box-shadow:0 0 0 10px #53e3a600;opacity:.65}}
+.service-card{transform-style:preserve-3d;will-change:transform}
+.service-card:after{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),#ffffff25,transparent 30%);opacity:0;transition:opacity .25s;pointer-events:none}
+.service-card:hover:after{opacity:1}
+.float-card{transition:transform .2s ease}
+.showcase-grid figure{transform-style:preserve-3d;will-change:transform}
