@@ -72,3 +72,33 @@
   };
   tick();
 })();
+
+/* Interactive 3D tilt + scroll parallax */
+(() => {
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce) return;
+  document.querySelectorAll('.service-card').forEach(card=>{
+    card.addEventListener('pointermove',e=>{
+      const r=card.getBoundingClientRect(), x=(e.clientX-r.left)/r.width, y=(e.clientY-r.top)/r.height;
+      card.style.setProperty('--mx',(x*100)+'%'); card.style.setProperty('--my',(y*100)+'%');
+      card.style.transform='perspective(900px) rotateX('+((.5-y)*7)+'deg) rotateY('+((x-.5)*8)+'deg) translateY(-6px)';
+    });
+    card.addEventListener('pointerleave',()=>card.style.transform='');
+  });
+  document.querySelectorAll('.showcase-grid figure').forEach(card=>{
+    card.addEventListener('pointermove',e=>{
+      const r=card.getBoundingClientRect(), x=(e.clientX-r.left)/r.width, y=(e.clientY-r.top)/r.height;
+      card.style.transform='perspective(1000px) rotateX('+((.5-y)*3)+'deg) rotateY('+((x-.5)*4)+'deg) translateY(-4px)';
+    });
+    card.addEventListener('pointerleave',()=>card.style.transform='');
+  });
+  const blocks=document.querySelectorAll('[data-parallax]');
+  addEventListener('scroll',()=>{
+    const sy=scrollY;
+    blocks.forEach(el=>{
+      const r=el.getBoundingClientRect(), center=innerHeight/2;
+      const d=(r.top+r.height/2-center);
+      el.style.setProperty('--scroll-shift',Math.max(-18,Math.min(18,-d*.035))+'px');
+    });
+  },{passive:true});
+})();
