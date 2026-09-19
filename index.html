@@ -22,6 +22,28 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Digital Growth Agency","url":"https://auai276200-blip.github.io/digital-growth-agency/","description":"Digital marketing agency providing SEO, social media marketing, social media management, video editing, graphic designing and AI graphic designing services.","areaServed":"Worldwide","serviceType":["Digital Marketing","SEO Services","Social Media Marketing","Social Media Management","Video Editing","Graphic Designing","AI Graphic Designing","Meta Ads","Facebook Ads","Instagram Ads","TikTok Ads","Google Ads","AI Services"]}</script>
 </head>
 <body>
+<!-- Auto inquiry popup -->
+<div class="lead-modal" id="leadModal" aria-hidden="true">
+  <div class="lead-backdrop" data-close-lead></div>
+  <div class="lead-dialog" role="dialog" aria-modal="true" aria-labelledby="leadTitle">
+    <button class="lead-close" type="button" aria-label="Close form" data-close-lead>×</button>
+    <div class="lead-kicker"><span></span> FREE CONSULTATION</div>
+    <h2 id="leadTitle">Tell us what you<br><em>want to grow.</em></h2>
+    <p>Share a few details and we'll connect with you on WhatsApp.</p>
+    <form id="leadForm">
+      <div class="lead-fields">
+        <label>Name<input name="name" type="text" placeholder="Your name" required></label>
+        <label>WhatsApp / Phone<input name="phone" type="tel" placeholder="03xx xxxxxxx" required></label>
+        <label>Email <span>(optional)</span><input name="email" type="email" placeholder="you@example.com"></label>
+        <label>Service<select name="service" required><option value="" selected disabled>Select a service</option><option>Digital Marketing</option><option>SEO</option><option>Social Media Marketing</option><option>Social Media Management</option><option>Video Editing</option><option>Graphic Designing</option><option>AI Graphic Designing</option><option>Meta Ads</option><option>Facebook Ads</option><option>Instagram Ads</option><option>TikTok Ads</option><option>Google Ads</option><option>AI Services</option><option>Not sure — need guidance</option></select></label>
+        <label class="lead-full">Your requirement<textarea name="message" rows="4" placeholder="Tell us what you need, your business, budget or goals..." required></textarea></label>
+      </div>
+      <button class="lead-submit" type="submit"><i class="fa-brands fa-whatsapp"></i> Send Details on WhatsApp <span>↗</span></button>
+      <small class="lead-note"><i class="fa-solid fa-lock"></i> Your details are used only to respond to your inquiry.</small>
+    </form>
+  </div>
+</div>
+
 <div class="topbar">Results-driven digital growth services <span>•</span> Fast response on WhatsApp</div>
 <header class="nav">
   <a class="logo" href="#top"><span class="logo-mark">DG</span><span>Digital Growth <b>Agency</b></span></a>
