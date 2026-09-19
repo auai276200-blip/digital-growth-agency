@@ -104,3 +104,24 @@
     });
   },{passive:true});
 })();
+
+/* Automatic consultation popup */
+(function(){
+  const modal=document.getElementById('leadModal');
+  const form=document.getElementById('leadForm');
+  if(!modal||!form)return;
+  const open=()=>{modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.classList.add('lead-open');setTimeout(()=>modal.querySelector('input')?.focus(),180)};
+  const close=()=>{modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.classList.remove('lead-open')};
+  setTimeout(open,1800);
+  modal.querySelectorAll('[data-close-lead]').forEach(el=>el.addEventListener('click',close));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('open'))close()});
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    const data=new FormData(form);
+    const name=(data.get('name')||'').trim(),phone=(data.get('phone')||'').trim(),email=(data.get('email')||'').trim(),service=(data.get('service')||'').trim(),message=(data.get('message')||'').trim();
+    const text='Hi Digital Growth Agency!%0A%0A*New Website Inquiry*%0AName: '+encodeURIComponent(name)+'%0AWhatsApp/Phone: '+encodeURIComponent(phone)+'%0AEmail: '+encodeURIComponent(email||'Not provided')+'%0AService: '+encodeURIComponent(service)+'%0ARequirement: '+encodeURIComponent(message);
+    window.location.href='https://wa.me/923341903823?text='+text;
+    close();
+    form.reset();
+  });
+})();
