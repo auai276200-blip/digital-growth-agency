@@ -59,3 +59,10 @@
 .service-card:hover:after{opacity:1}
 .float-card{transition:transform .2s ease}
 .showcase-grid figure{transform-style:preserve-3d;will-change:transform}
+
+/* Visible 3D showcase polish */
+.hero-visual .three-canvas{z-index:3!important;mix-blend-mode:normal!important;opacity:.92}
+.why-visual .three-canvas,.cta-visual .three-canvas{z-index:1!important;opacity:1}
+.hero-visual{background:radial-gradient(circle at 55% 48%,#8e83ff22,transparent 38%)}
+.three-label{display:flex;align-items:center;gap:8px}
+.three-label span{width:7px;height:7px;border-radius:50%;background:#53e3a6;box-shadow:0 0 0 5px #53e3a622;animation:livePulse 1.7s infinite}
