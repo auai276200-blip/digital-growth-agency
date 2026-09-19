@@ -33,16 +33,18 @@
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(38,1,.1,100);
     camera.position.set(0,0,7);
+    if(type==='hero') camera.position.z=6.4;
     const group = new THREE.Group();
     scene.add(group);
+    if(type==='hero') group.position.set(1.0,0.05,0);
     const light = new THREE.PointLight(0x8d7cff,2.2,20);
     light.position.set(3,4,5); scene.add(light);
     scene.add(new THREE.AmbientLight(0xffffff,1.4));
     let mesh;
     if(type==='hero'){
-      mesh = new THREE.Mesh(new THREE.TorusKnotGeometry(1.35,.32,120,18),new THREE.MeshPhysicalMaterial({color:0x7468ff,metalness:.25,roughness:.18,clearcoat:1,transparent:true,opacity:.88}));
+      mesh = new THREE.Mesh(new THREE.TorusKnotGeometry(1.55,.34,160,22),new THREE.MeshPhysicalMaterial({color:0x6758ff,metalness:.35,roughness:.12,clearcoat:1,emissive:0x241b72,emissiveIntensity:.22,transparent:true,opacity:.96}));
       group.add(mesh);
-      for(let n=0;n<18;n++){const p=new THREE.Mesh(new THREE.SphereGeometry(.045,10,10),new THREE.MeshBasicMaterial({color:0x3db7ff})); const a=n/18*Math.PI*2; p.position.set(Math.cos(a)*(2+.2*Math.sin(n)),Math.sin(a)*(2+.2*Math.sin(n)),Math.sin(n*1.7)*.7); group.add(p);}
+      for(let n=0;n<26;n++){const p=new THREE.Mesh(new THREE.SphereGeometry(.045,10,10),new THREE.MeshBasicMaterial({color:0x3db7ff})); const a=n/26*Math.PI*2; p.position.set(Math.cos(a)*(2+.2*Math.sin(n)),Math.sin(a)*(2+.2*Math.sin(n)),Math.sin(n*1.7)*.7); group.add(p);}
     } else if(type==='why'){
       mesh = new THREE.Mesh(new THREE.IcosahedronGeometry(1.25,2),new THREE.MeshPhysicalMaterial({color:0x9b8cff,metalness:.35,roughness:.16,wireframe:false,clearcoat:1,transparent:true,opacity:.9}));
       group.add(mesh);
