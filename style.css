@@ -80,3 +80,33 @@
   .hero-visual .three-canvas{opacity:.9!important}
   .main-card{background:rgba(255,255,255,.76)}
 }
+
+/* Guaranteed visible CSS 3D fallback - works even if WebGL/CDN is unavailable */
+.css3d-hero,.css3d-orb{position:absolute;pointer-events:none;transform-style:preserve-3d}
+.css3d-hero{z-index:3;right:9%;top:16%;width:235px;height:235px;animation:heroFloat 5s ease-in-out infinite}
+.css3d-core{position:absolute;inset:42px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#fff 0 5%,#9d94ff 14%,#6255f5 43%,#302675 72%,#15102f 100%);box-shadow:0 0 35px #6255f5aa,0 0 90px #6255f555;transform:translateZ(35px)}
+.css3d-hero:before,.css3d-hero:after{content:"";position:absolute;inset:18px;border:2px solid #6255f5aa;border-radius:50%;transform:rotateX(68deg) rotateZ(18deg);box-shadow:0 0 20px #6255f544}
+.css3d-hero:after{inset:2px;transform:rotateY(68deg) rotateZ(-20deg);border-color:#3db7ff88}
+.css3d-hero i{position:absolute;width:8px;height:8px;border-radius:50%;background:#3db7ff;box-shadow:0 0 14px #3db7ff;left:50%;top:50%;transform-origin:0 0}
+.css3d-hero i:nth-of-type(1){transform:rotate(0deg) translateX(112px);animation:orbit1 3s linear infinite}
+.css3d-hero i:nth-of-type(2){transform:rotate(90deg) translateX(105px);animation:orbit2 4s linear infinite}
+.css3d-hero i:nth-of-type(3){transform:rotate(180deg) translateX(112px);animation:orbit3 3.5s linear infinite}
+.css3d-hero i:nth-of-type(4){transform:rotate(270deg) translateX(105px);animation:orbit4 4.5s linear infinite}
+.css3d-hero span{position:absolute;width:100%;height:100%;border:1px dashed #8e83ff66;border-radius:50%;transform:rotateX(70deg);animation:spin3d 8s linear infinite}
+@keyframes heroFloat{50%{transform:translateY(-14px) rotateY(10deg)}}
+@keyframes spin3d{to{transform:rotateX(70deg) rotateZ(360deg)}}
+@keyframes orbit1{to{transform:rotate(360deg) translateX(112px)}}
+@keyframes orbit2{to{transform:rotate(450deg) translateX(105px)}}
+@keyframes orbit3{to{transform:rotate(540deg) translateX(112px)}}
+@keyframes orbit4{to{transform:rotate(630deg) translateX(105px)}}
+.css3d-orb{inset:0;display:grid;place-items:center;z-index:2}
+.css3d-orb>div{width:105px;height:105px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#fff,#9b8cff 18%,#6255f5 50%,#21183f 100%);box-shadow:0 0 35px #6255f5aa,0 0 100px #6255f555;animation:orbFloat 4s ease-in-out infinite}
+.css3d-orb:before,.css3d-orb:after{content:"";position:absolute;width:210px;height:75px;border:2px solid #3db7ff88;border-radius:50%;transform:rotateX(65deg) rotateZ(20deg);animation:spin3d 7s linear infinite}
+.css3d-orb:after{width:180px;height:55px;border-color:#a99eff88;transform:rotateY(65deg) rotateZ(-25deg);animation-direction:reverse}
+.css3d-orb i{position:absolute;width:7px;height:7px;border-radius:50%;background:#53e3a6;box-shadow:0 0 14px #53e3a6;transform:translate(100px) }
+.why-orb i:nth-of-type(1){animation:dotOrbit 3s linear infinite}.why-orb i:nth-of-type(2){animation:dotOrbit 4s linear infinite;animation-delay:-2s}
+.cta-orb{opacity:.65}.cta-orb>div{width:90px;height:90px}
+@keyframes orbFloat{50%{transform:translateY(-10px) scale(1.04)}}
+@keyframes dotOrbit{to{transform:rotate(360deg) translateX(100px)}}
+@media(max-width:900px){.css3d-hero{right:6%;top:18%;width:180px;height:180px}.css3d-core{inset:34px}.css3d-hero i:nth-of-type(1){transform:rotate(0deg) translateX(88px)}.css3d-hero i:nth-of-type(2){transform:rotate(90deg) translateX(82px)}.css3d-hero i:nth-of-type(3){transform:rotate(180deg) translateX(88px)}.css3d-hero i:nth-of-type(4){transform:rotate(270deg) translateX(82px)}}
+@media(max-width:560px){.css3d-hero{right:2%;top:16%;width:130px;height:130px}.css3d-core{inset:25px}.css3d-hero:before{inset:10px}.css3d-hero:after{inset:0}.css3d-hero i{width:6px;height:6px}.css3d-orb>div{width:75px;height:75px}}
